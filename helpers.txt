@@ -1,0 +1,27 @@
+# s3 bucket cors
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "POST",
+            "DELETE",
+            "GET",
+            "HEAD"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]
+
+# Elastic Beanstalk deployment
+-> eb init  //create Beanstalk application in AWS
+//add following code in .elasticbeanstalk/config.yml for artifact based deployment. artifact key refers to zip file containing code.
+deploy:
+  artifact: ./www/Archive.zip
+-> eb create  //create environment against application in AWS and deploy artifact on it (set env variables in AWS console if needed).
+-> eb deploy  //re-deploy application to existing environment (probably to deploy updated code).
