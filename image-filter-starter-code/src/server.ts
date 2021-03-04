@@ -16,14 +16,14 @@ import * as fs from "fs";
 
   // GET /filteredimage?image_url={{URL}}
   // endpoint to filter an image from a public url.
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: express.Request, res: express.Response) => {
     if (!req.query || ! req.query.image_url) {
       res.status(422).send("image_url is required");
     }
 
     try {
-      const filePath = await filterImageFromURL(req.query.image_url);
-      const data = fs.readFileSync(filePath);
+      const filePath: string = await filterImageFromURL(req.query.image_url);
+      const data: Buffer = fs.readFileSync(filePath);
 
       deleteLocalFiles([filePath]);
 
